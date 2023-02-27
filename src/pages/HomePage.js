@@ -40,7 +40,7 @@ const HomePage = () => {
         try {
             const user = JSON.parse(localStorage.getItem('user'))
 
-            const res = await axios.post('/get-transection', {
+            const res = await axios.post('https://money-bakend.onrender.com/get-transection', {
                 userid: user.id,
                 type,
 
@@ -61,7 +61,7 @@ const HomePage = () => {
             const del = window.confirm(" you want to delete!!")
             if (del) {
                 getAllTranc()
-                await axios.delete(`/delete-transection/${id}`)
+                await axios.delete(`https://money-bakend.onrender.com/delete-transection/${id}`)
                 message.success('Delete')
             } else {
                 message.error('chancel')
@@ -79,7 +79,7 @@ const HomePage = () => {
             const user = JSON.parse(localStorage.getItem('user'))
             console.log(user.id);
 
-            const data = await axios.post('/add-transection', { ...values, userid: user.id })
+            const data = await axios.post('https://money-bakend.onrender.com/add-transection', { ...values, userid: user.id })
 
             message.success("transction add success")
             console.log(data.data);

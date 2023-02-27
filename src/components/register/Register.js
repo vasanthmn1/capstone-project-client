@@ -20,7 +20,7 @@ const Register = () => {
     const sumitHandeler = async (value) => {
         try {
             // setLodiing(true)
-            const user = await axios.post('/register', value)
+            const user = await axios.post('https://money-bakend.onrender.com/register', value)
             console.log(user);
             message.success('Register sussess')
             setLodiing(true)
