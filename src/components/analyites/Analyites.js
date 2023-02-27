@@ -105,7 +105,7 @@ const Analyites = ({ gettAlltran }) => {
 
                         catagorys.map((val) => {
                             const amount = gettAlltran.filter(tran => tran.type === "income" && tran.catagory === val).reduce((acc, tran) => acc + tran.amount, 0)
-                            console.log(amount);
+
                             return (
                                 // amount > 0 && (
                                 <div className='card my-2' >
@@ -128,7 +128,7 @@ const Analyites = ({ gettAlltran }) => {
 
                         catagorys.map((val) => {
                             const amount = gettAlltran.filter(tran => tran.type === "expense" && tran.catagory === val).reduce((acc, tran) => acc + tran.amount, 0)
-                            console.log(amount);
+
                             return (
                                 // amount > 0 && (
                                 <div className='card  my-2'>
