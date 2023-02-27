@@ -45,6 +45,7 @@ const HomePage = () => {
                 type,
 
             })
+
             setgetsetAlltran(res.data.transections)
         } catch (error) {
             console.log(error);
@@ -79,6 +80,7 @@ const HomePage = () => {
             console.log(user.id);
 
             const data = await axios.post('/add-transection', { ...values, userid: user.id })
+
             message.success("transction add success")
             console.log(data.data);
             seteditTable(null)
