@@ -19,10 +19,8 @@ const Login = () => {
     const sumitHandeler = async (value) => {
         try {
             const user = await axios.post('/login', value)
-            console.log(await axios.post('/login', value));
-            // setLodiing(true)
             message.success('login sussess')
-            console.log(user.data);
+
             localStorage.setItem('user', JSON.stringify({ ...user.data }))
             navigate('/')
 
