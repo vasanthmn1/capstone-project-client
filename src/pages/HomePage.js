@@ -40,7 +40,7 @@ const HomePage = () => {
         try {
             const user = JSON.parse(localStorage.getItem('user'))
 
-            const res = await axios.post('/get-transection', {
+            const res = await axios.post('https://money-bakend.onrender.com/get-transection', {
                 userid: user.id,
                 type,
 

@@ -18,7 +18,7 @@ const Login = () => {
 
     const sumitHandeler = async (value) => {
         try {
-            const user = await axios.post('/login', value)
+            const user = await axios.post('https://money-bakend.onrender.com/login', value)
             message.success('login sussess')
 
             localStorage.setItem('user', JSON.stringify({ ...user.data }))
