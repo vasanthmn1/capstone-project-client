@@ -34,8 +34,8 @@ const HomePage = () => {
     useEffect(() => {
         getAllTranc()
 
-    }, [type, gettAlltran])
-
+    }, [type])
+    console.log(gettAlltran);
     const getAllTranc = async () => {
         try {
             const user = JSON.parse(localStorage.getItem('user'))
@@ -43,9 +43,7 @@ const HomePage = () => {
             const res = await axios.post('https://money-bakend.onrender.com/get-transection', {
                 userid: user.id,
                 type,
-
             })
-
             setgetsetAlltran(res.data.transections)
         } catch (error) {
             console.log(error);
@@ -83,6 +81,7 @@ const HomePage = () => {
 
             message.success("transction add success")
             console.log(data.data);
+            getAllTranc()
             seteditTable(null)
             setIsModalOpen(false);
         } catch (error) {

@@ -83,7 +83,7 @@ box-shadow: 10px 2px 63px -33px rgba(0,0,0,0.75);
   width:100px !important;
  }
   .input{
-   
+   border: 1px solid black !important;
      margin-left:10px;
     
   }
