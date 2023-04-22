@@ -1,6 +1,20 @@
 import { Progress } from 'antd'
 import React from 'react'
 
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, LinearScale } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+import { defaultConfig } from 'antd/es/theme/internal';
+
+// Chart.registerScaleType('linear', LinearScale, defaultConfig);
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+
+Chart.register(LinearScale);
+
 const Analyites = ({ gettAlltran }) => {
     // total
     const totalTrancition = gettAlltran.length
@@ -33,119 +47,149 @@ const Analyites = ({ gettAlltran }) => {
         "Medical"
     ]
 
+
+
+    // ! DoughnutChart.js
+    const Transction = {
+        labels: [
+            'expense',
+            'income',
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [
+                totalExpensetranction.length,
+                totalIncometranction.length,
+                ,
+            ],
+            backgroundColor: [
+                'red',
+                'green',
+                'blue'
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+    const TurnOver = {
+        labels: [
+            'expense',
+            'income',
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [
+                totalEcpensceTurnover,
+                totalincomeTurnover,],
+            backgroundColor: [
+                'red',
+                'green'
+            ],
+            hoverOffset: 4
+        }]
+    };
+
+
+    // !
+    const bar = catagorys.map((val) => {
+        const da = gettAlltran.filter(tran => tran.type === "income" && tran.catagory === val).reduce((acc, tran) => acc + tran.amount, 0)
+        return ((da / totalincomeTurnover) * 100).toFixed(0)
+    })
+
+
+    console.log(bar);
+
+    const incombar = {
+        labels: ['Salary', 'Projet', 'Trip', 'Shopping', 'Fee', 'Shopping', 'Medical',],
+        datasets: [
+            {
+                label: 'Income',
+                data:
+                    bar
+
+                ,
+                backgroundColor: [
+                    'greenyellow',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(01, 262, 235, 1)',
+                    'rgba(255, 70, 16, 1)',
+                ],
+
+                borderWidth: 1,
+            },
+        ],
+    };
+
+    const exbar = catagorys.map((val) => {
+        const da = gettAlltran.filter(tran => tran.type === "expense" && tran.catagory === val).reduce((acc, tran) => acc + tran.amount, 0)
+        return ((da / totalincomeTurnover) * 100).toFixed(0)
+    })
+
+    const expancebar = {
+        labels: ['Salary', 'Projet', 'Trip', 'Shopping', 'Fee', 'Shopping', 'Medical',],
+        datasets: [
+            {
+                label: 'Expence',
+                data:
+                    exbar
+
+                ,
+                backgroundColor: [
+                    'red',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(01, 262, 235, 1)',
+                    'rgba(255, 70, 16, 1)',
+                ],
+
+                borderWidth: 1,
+            },
+        ],
+    };
+
+
+    const options = {
+        scales: {
+            y: {
+                beginAtZero: true,
+            },
+        },
+    };
+
+
     return (
         <div className='container '>
+
+            <div className='row doughnut gap-5' >
+                <div className='col-lg-5 mt-2'>
+                    <h1 className='text-center'>Total Transction : {totalTrancition} </h1>
+                    <Doughnut data={Transction} />
+                </div>
+                <div className='col-lg-5 mt-2'>
+                    <h1 className='text-center'>Total TurnOver :  {totalTrancition} </h1>
+                    <Doughnut data={TurnOver} />
+                </div>
+            </div>
             <div className='row'>
-                <div className='col-lg-6 mt-5 '>
-                    <div className='card '>
-                        <div className='row  ' >
-                            <div className='card-header'>
-                                Total Transction : {totalTrancition}
-                            </div>
-                            <div className='col-md-4 col-sm-4 py-4  '>
-
-                                <div className='card-body'>
-                                    <h5 className='text-success'>Income:{totalIncometranction.length}</h5>
-                                    <h5 className='text-danger'>Expence:{totalExpensetranction.length}</h5>
-                                </div>
-                            </div>
-                            <div className='col-md-6 d-flex col-sm-8  py-4  '>
-                                <Progress type='circle'
-                                    strokeColor={'green'}
-                                    className='mx-2'
-                                    percent={totalIncomePercent.toFixed(0)}
-                                />
-                                <Progress type='circle'
-                                    strokeColor={'red'}
-                                    className='mx-2'
-                                    percent={totalExpensePercent.toFixed(0)}
-                                />
-                            </div>
-
-
-
-                        </div>
-                    </div>
+                <div className='col-lg-10 mt-5 barchart'>
+                    <h2>Bar Income</h2>
+                    <Bar data={incombar} options={options} />
                 </div>
-                <div className='col-lg-6 mt-5'>
-                    <div className='card'>
-                        <div className='row'>
-                            <div className='card-header'>
-                                Total TurnOver : {totalTurnover}
-                            </div>
-                            <div className='col-md-4 col-sm-4 py-4'>
-                                <div className='card-body'>
-                                    <h5 className='text-success'>Income:{totalincomeTurnover}</h5>
-                                    <h5 className='text-danger'>Expence:{totalEcpensceTurnover}</h5>
-                                </div>
-                            </div>
-                            <div className='col-md-8 col-sm-8 d-flex py-4'>
-                                <div>
-                                    <Progress type='circle'
-                                        strokeColor={'green'}
-                                        className='mx-2'
-                                        percent={totalIncometurnOverpresent.toFixed(0)}
-                                    />
-                                    <Progress type='circle'
-                                        strokeColor={'red'}
-                                        className='mx-2'
-                                        percent={totalExpenseturnOverpresent.toFixed(0)}
-                                    />
-                                </div>
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div className='row mt-4'>
-                <div className='col-lg-6 mt-3'>
-                    <h4>Category Income</h4>
-                    {
-
-                        catagorys.map((val) => {
-                            const amount = gettAlltran.filter(tran => tran.type === "income" && tran.catagory === val).reduce((acc, tran) => acc + tran.amount, 0)
-
-                            return (
-                                // amount > 0 && (
-                                <div className='card my-2' >
-                                    <div className='cord-body'>
-                                        <h1>{val}</h1>
-                                        <catagorys />
-                                        <Progress percent={((amount / totalincomeTurnover) * 100).toFixed(0)} />
-                                    </div>
-                                </div>
-                                // )
-
-                            )
-                        })
-
-                    }
+            <div className='row'>
+                <div className='col-lg-10 mt-5 barchart'>
+                    <h2>Bar Expence</h2>
+                    <Bar data={expancebar} options={options} />
                 </div>
-                <div className='col-lg-6 mt-3'>
-                    <h4>Category Expence</h4>
-                    {
 
-                        catagorys.map((val) => {
-                            const amount = gettAlltran.filter(tran => tran.type === "expense" && tran.catagory === val).reduce((acc, tran) => acc + tran.amount, 0)
-
-                            return (
-                                // amount > 0 && (
-                                <div className='card  my-2'>
-                                    <div className='cord-body '>
-                                        <h1>{val}</h1>
-                                        <catagorys />
-                                        <Progress percent={((amount / totalincomeTurnover) * 100).toFixed(0)} />
-                                    </div>
-                                </div>
-                                // )
-
-                            )
-                        })
-
-                    }
-                </div>
             </div>
+
         </div>
     )
 }

@@ -179,6 +179,16 @@ flex-direction: column;
 .table{
   width: 100%;
   overflow-x: scroll;
+  
+}
+.table::-webkit-scrollbar{
+  width: 0.5rem;
+  height: 0.6rem;
+}
+.table::-webkit-scrollbar-thumb{
+  background-color: #865DFF;
+  border-radius: 5px;
+/* visibility: hidden; */
 }
 .content h6{
   color: #fff;
@@ -197,4 +207,17 @@ flex-direction: column;
   flex-direction: column;
   color: #fff;
   cursor: pointer;
+}
+.doughnut{
+  background-color: aliceblue;
+  margin-top: 50px !important;
+  border-radius: 15px;
+  padding: 50px 10px;
+}
+.barchart{
+  background-color: aliceblue;
+  margin-top: 50px !important;
+  border-radius: 15px;
+  padding: 50px 10px;
+  
 }

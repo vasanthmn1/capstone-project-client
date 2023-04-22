@@ -70,8 +70,6 @@ const HomePage = () => {
         }
     }
 
-
-
     const sumitHandeler = async (values) => {
         try {
             const user = JSON.parse(localStorage.getItem('user'))
