@@ -6,22 +6,16 @@ import Spinners from '../../utils/Spinner';
 const Register = () => {
 
 
-    const validateMessages = {
-        required: '${label} is required!',
-        types: {
-            email: '${label} is not a valid email!',
 
-        },
-    };
     const [loading, setLodiing] = useState(false)
 
     const navigate = useNavigate()
 
     const sumitHandeler = async (value) => {
         try {
-            // setLodiing(true)
-            const user = await axios.post('https://money-bakend.onrender.com/register', value)
-            console.log(user);
+
+            await axios.post('https://money-bakend.onrender.com/register', value)
+
             message.success('Register sussess')
             setLodiing(true)
 
@@ -45,14 +39,13 @@ const Register = () => {
                 <div className='register'>
 
                     <Form
-                        validateMessages={validateMessages}
+
                         name="basic"
                         labelCol={{ span: 8 }}
                         wrapperCol={{ span: 16 }}
                         style={{ maxWidth: 600 }}
                         initialValues={{ remember: true }}
                         onFinish={sumitHandeler}
-                        // onFinishFailed={onFinishFailed}
                         autoComplete="off"
                         className='input-filed form-register'
                         layout='vertical'

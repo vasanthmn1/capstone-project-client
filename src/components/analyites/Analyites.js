@@ -1,14 +1,11 @@
-import { Progress } from 'antd'
+
 import React from 'react'
-
-
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, LinearScale } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
-import { defaultConfig } from 'antd/es/theme/internal';
 
-// Chart.registerScaleType('linear', LinearScale, defaultConfig);
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
